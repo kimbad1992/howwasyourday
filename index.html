@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div id="external-links" class="top-left-links">
+    <p>시간 보내기 좋은 장소 👇</p>
+    <ul>
+        <li><a href="https://semantle-ko.newsjel.ly/" target="_blank">꼬맨틀</a></li>
+        <li><a href="https://www.newmantle.kr/" target="_blank">뉴맨틀</a></li>
+        <li><a href="https://kordle.kr/" target="_blank">꼬들</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
     <div class="container">
         <h1>오늘 하루, 어떻게 지나갔나요? 🤔</h1>
         <div class="buttons">
@@ -24,8 +34,18 @@
             </div>
         </div>
     </div>
-</body>
+</div>
+
+<div class="statistics-container">
+    <div class="stat-box" id="total-votes-today">오늘 총 0명이 투표했어요.</div>
+    <div class="stat-box" id="same-choice-count"></div>
+    <div class="stat-box" id="peak-hour"></div>
+    <div class="stat-box" id="slowest-day"></div>
+    <div class="stat-box" id="fastest-day"></div>
+</div>
+
 <script src="https://unpkg.com/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="script.js"></script>
+</body>
 </html>

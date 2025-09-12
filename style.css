@@ -1,45 +1,166 @@
+/* --- 기본 및 레이아웃 --- */
 body {
     font-family: sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
-    background-color: #f0f2f5;
+    background-color: #87CEEB; /* 하늘색 배경 */
+    margin: 0;
+    overflow: hidden; /* 구름이 화면 밖으로 나가지 않도록 */
+
+    /* ✅ 1. 화면을 3x3 격자로 나누어 중앙 영역 확보 */
+    display: grid;
+    grid-template-columns: 1fr 550px 1fr; /* 중앙 너비 550px, 나머지는 유연하게 */
+    grid-template-rows: 1fr auto 1fr;
+    grid-template-areas:
+        "top-left top top-right"
+        "left center right"
+        "bottom-left bottom bottom-right";
+    align-items: center; /* 중앙 컨텐츠를 세로 중앙에 배치 */
+    justify-items: center; /* 중앙 컨텐츠를 가로 중앙에 배치 */
+}
+
+/* --- 중앙 투표 영역 --- */
+.main-content {
+    /* ✅ 2. 중앙(center) 영역에 배치 */
+    grid-area: center;
+    z-index: 10;
+    width: 100%;
 }
 .container {
     text-align: center;
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 100%;
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
 }
-.buttons button {
-    font-size: 1.2rem;
-    padding: 15px 30px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+
+/* ... (기존 .buttons, .results 등 스타일은 여기에 그대로 유지) ... */
+.buttons button { font-size: 1.2rem; padding: 15px 30px; margin: 10px; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
 #fast-btn { background-color: #4CAF50; color: white; }
 #slow-btn { background-color: #f44336; color: white; }
-#fast-btn:hover { background-color: #45a049; }
-#slow-btn:hover { background-color: #da190b; }
 .results { margin-top: 30px; }
-.progress-bar {
-    display: flex;
-    height: 30px;
-    width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    overflow: hidden;
-}
+.progress-bar { display: flex; height: 30px; width: 100%; background-color: #e0e0e0; border-radius: 5px; overflow: hidden; }
 .progress { transition: width 0.5s ease-in-out; }
 .fast { background-color: #4CAF50; }
 .slow { background-color: #f44336; }
-.labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+.labels { display: flex; justify-content: space-between; margin-top: 10px; }
+
+
+/* --- 통계 구름 --- */
+.statistics-container {
+    /* ✅ 3. 구름들이 중앙을 제외한 모든 영역을 자유롭게 사용하도록 설정 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+}
+.stat-box {
+    position: absolute;
+    background: white;
+    padding: 20px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: #333;
+    font-size: 0.9rem;
+    text-align: center;
+
+    /* ✅ 4. 구름 모양과 줄바꿈 처리 */
+    max-width: 180px; /* 구름의 최대 너비 지정 */
+    /* white-space: nowrap; <- 이 속성 제거! */
+
+    animation: float 20s infinite ease-in-out;
+}
+/* ... (구름 모양 ::before, ::after 스타일은 그대로 유지) ... */
+.stat-box::before, .stat-box::after { content: ''; position: absolute; background: white; border-radius: 50%; z-index: -1; }
+.stat-box::before { width: 60%; height: 60%; top: -30%; left: 20%; }
+.stat-box::after { width: 80%; height: 80%; top: 10%; right: -20%; }
+
+/* 각 구름의 위치와 애니메이션 시간차 설정 */
+#total-votes-today { top: 15%; left: 10%; animation-duration: 25s; }
+#same-choice-count { top: 20%; right: 10%; animation-duration: 30s; animation-delay: -5s; }
+#peak-hour { top: 65%; right: 15%; animation-duration: 22s; animation-delay: -10s; }
+#slowest-day { top: 70%; left: 15%; animation-duration: 28s; animation-delay: -15s; }
+#fastest-day { top: 50%; left: 40%; animation: none; /* 중앙 근처 구름은 잠시 고정 */ opacity: 0; /* 필요시 다시 보이게 할 수 있음 */ }
+
+/* 둥실둥실 떠다니는 애니메이션 (그대로 유지) */
+@keyframes float {
+    0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+    25% { transform: translateY(-15px) translateX(10px) rotate(-2deg); }
+    50% { transform: translateY(10px) translateX(-10px) rotate(0deg); }
+    75% { transform: translateY(-10px) translateX(15px) rotate(2deg); }
+    100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
+}
+
+/* --- 좌측 상단 링크 --- */
+.top-left-link {
+    /* ✅ 5. 그리드 영역의 좌상단에 배치 */
+    grid-area: top-left;
+    justify-self: start; /* 왼쪽 정렬 */
+    align-self: start; /* 위쪽 정렬 */
+    margin: 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    z-index: 20;
+    transition: background-color 0.3s;
+}
+.top-left-link:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* --- 좌측 상단 링크 목록 --- */
+.top-left-links {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 20;
+    max-width: 250px;
+}
+
+.top-left-links p {
+    margin: 0 0 8px 0;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.top-left-links ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.top-left-links li {
+    margin-bottom: 5px;
+}
+
+.top-left-links a {
+    display: flex; /* 아이콘과 텍스트 정렬을 위해 */
+    align-items: center; /* 세로 중앙 정렬 */
+    text-decoration: none;
+    color: #0056b3;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.top-left-links a:hover {
+    color: #007bff;
+}
+
+/* 파비콘 스타일 */
+.favicon {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px; /* 텍스트와의 간격 */
+    vertical-align: middle;
 }
