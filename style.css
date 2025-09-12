@@ -164,3 +164,63 @@ body {
     margin-left: 8px; /* 텍스트와의 간격 */
     vertical-align: middle;
 }
+
+/* ✅ 3. 모바일 반응형 CSS 추가 */
+@media (max-width: 600px) {
+    body {
+        /* 모바일에서는 그리드 레이아웃 대신 단순 블록 형태로 변경 */
+        display: block;
+        padding: 15px;
+        overflow: auto; /* 구름이 많아도 스크롤 가능하도록 */
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .main-content, .statistics-container {
+        position: static; /* 위치 고정 해제 */
+        grid-area: auto; /* 그리드 영역 해제 */
+        height: auto;
+        width: 100%;
+    }
+
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .buttons button {
+        font-size: 1rem;
+        padding: 12px 20px;
+    }
+
+    .top-left-links {
+        position: static; /* 위치 고정 해제 */
+        margin: 0 0 20px 0; /* 메인 컨텐츠 위에 위치 */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 모바일에서는 구름 애니메이션을 끄고 정적인 박스로 변경 */
+    .statistics-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .stat-box {
+        position: static;
+        animation: none; /* 애니메이션 제거 */
+        opacity: 1;
+        max-width: none; /* 너비 제한 해제 */
+        border-radius: 8px; /* 구름 모양 대신 사각 박스 */
+        padding: 15px;
+    }
+    /* 구름 꼬리 제거 */
+    .stat-box::before, .stat-box::after {
+        display: none;
+    }
+}
