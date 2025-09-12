@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘 하루 어땠나요?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>오늘 하루, 어떻게 지나갔나요? 🤔</h1>
+        <div class="buttons">
+            <button id="fast-btn">빨리 갔다 🚀</button>
+            <button id="slow-btn">늦게 갔다 🐢</button>
+        </div>
+        <div class="results">
+            <div class="progress-bar">
+                <div id="fast-progress" class="progress fast"></div>
+                <div id="slow-progress" class="progress slow"></div>
+            </div>
+            <div class="labels">
+                <span id="fast-label">빨리 갔다 0%</span>
+                <span id="slow-label">늦게 갔다 0%</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/@fingerprintjs/fingerprintjs@3/dist/fp.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="script.js"></script>
+</html>
