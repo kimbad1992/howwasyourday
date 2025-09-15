@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자야구 - 시간 삭제용</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚾</text></svg>">
+    <link rel="stylesheet" href="baseball.style.css">
+</head>
+<body>
+
+<a href="index.html" class="back-link">📊 투표 페이지로 돌아가기</a>
+
+<main class="container">
+    <h1>⚾ 숫자야구 게임</h1>
+    <p class="description">컴퓨터가 생각한 4자리 숫자를 맞춰보세요! (중복 숫자 없음)</p>
+
+    <div class="input-area">
+        <input type="text" id="guess-input" maxlength="4" placeholder="네 자리 숫자 입력">
+        <button id="guess-btn">확인</button>
+        <button id="give-up-btn" class="secondary-btn">포기</button>
+    </div>
+
+    <div class="game-info">
+        <span>남은 기회: <strong id="tries-left">10</strong></span>
+        <span>경과 시간: <strong id="timer">00:00</strong></span>
+    </div>
+
+    <div class="history-area">
+        <h2>결과 기록</h2>
+        <ul id="history-list">
+        </ul>
+    </div>
+
+    <div id="game-over-message" class="hidden">
+        <p id="result-text"></p>
+        <button id="restart-btn">다시 시작</button>
+    </div>
+</main>
+
+<script src="baseball.script.js"></script>
+
+</body>
+</html>

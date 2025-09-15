@@ -1,0 +1,110 @@
+/* --- 기본 및 레이아웃 --- */
+body {
+    font-family: sans-serif;
+    min-height: 100vh;
+    background-color: #87CEEB;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+h1 { margin-top: 0; color: #333; }
+.description { color: #666; margin-bottom: 25px; }
+
+/* --- 입력 영역 --- */
+.input-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+#guess-input {
+    flex-grow: 1;
+    padding: 12px;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#guess-btn, .secondary-btn {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#guess-btn { background-color: #4CAF50; }
+#guess-btn:hover { background-color: #45a049; }
+
+/* ✅ '포기' 버튼 스타일 추가 */
+.secondary-btn { background-color: #6c757d; }
+.secondary-btn:hover { background-color: #5a6268; }
+
+
+/* --- 게임 정보 및 기록 --- */
+/* ✅ 타이머와 남은 기회를 양쪽으로 정렬 */
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    color: #555;
+    padding: 0 10px;
+}
+
+.history-area {
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 15px;
+    min-height: 150px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.history-area h2 {
+    margin: 0 0 10px 0;
+    font-size: 1rem;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+#history-list { list-style: none; padding: 0; margin: 0; text-align: left; }
+#history-list li { display: flex; justify-content: space-between; padding: 8px 5px; border-bottom: 1px solid #eee; }
+#history-list li:last-child { border-bottom: none; }
+#history-list .guess { font-weight: bold; font-family: monospace; font-size: 1.1rem; }
+#history-list .result { font-weight: bold; }
+.result-strike { color: #28a745; }
+.result-ball { color: #007bff; }
+.result-out { color: #6c757d; }
+
+/* --- 게임 오버 메시지 --- */
+.hidden { display: none !important; }
+#game-over-message { margin-top: 20px; padding: 15px; border-radius: 5px; background-color: #e9ecef; }
+#restart-btn { margin-top: 10px; padding: 10px 20px; font-size: 1rem; border: none; background-color: #007bff; color: white; border-radius: 5px; cursor: pointer; }
+
+/* --- 돌아가기 링크 --- */
+.back-link { position: absolute; top: 20px; left: 20px; text-decoration: none; color: #fff; background-color: rgba(0, 0, 0, 0.2); padding: 8px 12px; border-radius: 5px; font-size: 0.9rem; z-index: 20; transition: background-color 0.3s; }
+.back-link:hover { background-color: rgba(0, 0, 0, 0.4); }
+
+/* 모바일 반응형 */
+@media (max-width: 600px) {
+    body { align-items: flex-start; }
+    .container { padding: 20px; }
+}
