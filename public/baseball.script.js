@@ -32,7 +32,7 @@ function initializeGame() {
         const index = Math.floor(Math.random() * numbers.length);
         answer.push(numbers.splice(index, 1)[0]);
     }
-    console.log('정답:', answer.join(''));
+    // console.log('정답:', answer.join(''));
 
     // 2. 변수 및 UI 초기화
     triesLeft = 10;
